@@ -7,6 +7,21 @@ const gridSize = 28
 
 const url = 'http://127.0.0.1:8000/predict'
 
+const throttleDelay = 150 
+
+function throttle(fun,delay){
+    let lastCall = 0
+    return function(...args){
+        const now = Date.now()
+        if (now - lastCall < delay) {
+            return
+        }
+        last = now
+        return fun(...args)}
+}
+
+const throttledPostData = throttle(postData, throttleDelay)
+
 function createInputGrid(){
     for (let index = 0; index < gridSize*gridSize; index++) {
         const pixel = document.createElement('div')
@@ -17,7 +32,7 @@ function createInputGrid(){
             if (event.buttons ===1 ){
                 pixel.style.backgroundColor = '#000000'
                 userInputList[Number(pixel.classList[1])] = 1
-                postData(userInputList)
+                throttledPostData(userInputList)
             }
     })    
         drawingBoard.appendChild(pixel)  
