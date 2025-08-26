@@ -7,7 +7,7 @@ const gridSize = 28
 
 const url = 'http://127.0.0.1:8000/predict'
 
-const throttleDelay = 150 
+const throttleDelay = 350 
 
 function throttle(fun,delay){
     let lastCall = 0
@@ -27,7 +27,7 @@ function createInputGrid(){
         const pixel = document.createElement('div')
         pixel.classList.add('pixel',String(index))
 
-        pixel.addEventListener('mouseover',(event) => {
+        pixel.addEventListener('pointerenter',(event) => {
             
             if (event.buttons ===1 ){
                 pixel.style.backgroundColor = '#000000'
